@@ -136,8 +136,9 @@ app.use('/fonts',express.static(__dirname + '/node_modules/font-awesome/fonts'))
 
 
 
+app.set( 'port', ( process.env.PORT || 300 ));
 
-
-const port = process.env.port || 700;
-
-app.listen(port,()=>console.log('Server is listening to port'+" "+ port));
+// Start node server
+app.listen( app.get( 'port' ), function() {
+  console.log( 'Node server is running on port ' + app.get( 'port' ));
+  });
