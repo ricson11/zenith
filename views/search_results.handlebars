@@ -1,0 +1,50 @@
+<div class="container my-4 col-md-10 ">
+    <div class="row">
+        <div class="col">
+            {{#if features}}
+          <p class="text-center">Search result for {{query}}</p>
+          {{/if}} 
+       {{#each features}}
+      <div class="card" id="cardo">
+          <div class="card-header">
+       <p>posted in {{category}} by {{user.username}}</p>
+          </div>
+        <img class="card-top-img" src="{{image}}" id="imgCard">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+            <p class="card-text" id="details">{{details}}</p>
+        </div>  
+      </div>
+      {{else}} 
+ <p class="text-center">No search result found for {{query}}</p> 
+    
+       {{/each}}
+       </div>
+       </div>
+       </div>
+       <!--end -->
+
+
+
+<style>
+    body{
+        background: ghostwhite;
+        margin:0;
+        padding:0;
+    }
+    #welcome img{
+    width:50px;
+    width:50px;
+    border-radius: 50%;
+}
+.card{
+    background: ghostwhite;
+    margin-bottom: 10px;
+}
+#imgCard{
+    height:70vh;
+}
+#user{
+    
+}
+</style>

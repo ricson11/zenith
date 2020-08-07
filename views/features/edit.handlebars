@@ -1,0 +1,82 @@
+<div class="container my-5">
+    <form action="/features/{{feature._id}}?_method=PUT" method="POST" >
+    <input type="hidden" name="_method" value="PUT">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" class="form-control" value="{{feature.title}}" id="tit">
+    </div>
+   
+        <div class="form-group">
+        <label for="details">Details</label>
+        <textarea name="details" class="form-control" id="textarea">{{feature.details}}</textarea>
+    </div>
+      <div class="form-group">
+        <label for="category">Post Category</label>
+    <select name="category" class="form-control" id="select">
+        {{#selected feature.category}}
+     <option value="news">News</option>
+     <option value="entertainment">Entertainment</option>
+     <option value="education">Education</option>
+        <option value="politics">Politics</option>
+
+   
+    {{/selected}}
+     </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Post</button>
+    </form>
+</div>
+
+
+
+
+
+<style>
+    body{
+        background: ghostwhite;
+    }
+    #tit{
+        background: ghostwhite;
+    }
+    label{
+        font-weight: bold;
+    }
+    #textarea{
+        padding:50px;
+        background: ghostwhite;
+    }
+    .btn{
+        padding:10px;
+        width:18vw;
+        font-weight:bold;
+    }
+     #select{
+        width:20vw;
+        background: ghostwhite;
+        font-weight: bold;
+    }
+    #footer p{
+        text-align: center;
+    }
+    #welcome{
+    font-size:1.1em;
+    text-transform: capitalize;
+}
+#welcome img{
+    width:50px;
+    width:50px;
+    border-radius: 50%;
+}
+    @media (max-width:600px){
+        .btn{
+        padding:10px;
+        width:30vw;
+        font-weight:bold;
+    }
+    #select{
+        width:40vw;
+        background: ghostwhite;
+        font-weight: bold;
+    }
+    }
+</style>

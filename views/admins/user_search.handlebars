@@ -1,0 +1,53 @@
+
+<div class="container my-4">
+   {{#each users}}
+   <div class="card mb-3">
+      <div class="card-header">
+     <p class="text-center font-bold">User info</p>
+      </div>
+      <div class="card-body">
+         <p class="text-center">Username:  <a href="/user/{{_id}}/{{username}}" >{{username}} </a></p>
+         <p class="text-center">email: {{email}}</p>{{password}}
+         <p class="text-center">picture</p>
+         <img src="{{photo}}" class="d-block mx-auto" width="200px">
+       <p class="text-right "><a class="text-white bg-success p-3" id="edits" href="/users/edit/{{_id}}">Edit User</a></p>  
+        
+         <form action="/user/{{_id}}?_method=DELETE" method="POST">
+         <input type="hidden" name="_method" value="DELETE">
+         <button class="btn btn-danger " type="submit" >Delete User</button>
+         </form>
+      </div>
+   </div>
+   {{/each}}
+</div>
+
+
+
+<style>
+      
+      #edits{
+          box-shadow:0px 2px 2px grey;
+          text-decoration: none;
+      }
+     body{
+       background: ghostwhite;
+   } 
+   #cardAd{
+            background: ghostwhite;
+  
+   }
+   #cardAd img{
+       height:70vh;
+   }
+   #edit{
+       text-decoration: none;
+       background: blue;
+       color:white;
+       padding:5px;
+       font-weight: bold;
+       border-radius: 10px;
+   }
+   #footer p{
+    text-align: center;
+}
+</style>

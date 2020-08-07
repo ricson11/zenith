@@ -1,0 +1,66 @@
+<div class="container-fluid bg-light p-2 border">
+  <a href="/" id="one"><h5 class="text-center text-danger mt-2 " id="head">Zenith Forum</h5></a>
+    <ul class="nav d-flex justify-content-center">
+    
+     {{#if user}}
+        <span id="welcome">welcome, <a href="/profile" class="text-danger font-bold" id="topName">{{user.username}} </a> <img src="{{user.photo}}"></span>
+     {{else}}
+      <span id="welcome">welcome, <a class="text-danger font-bold" id="topName">Guess </a></span>
+
+   {{/if}}
+  
+   </ul>
+    <div class="container">
+        
+    {{#if user.superAdmin}}
+    <p class="text-center text-danger">SuperAdmin</p>
+    {{/if}}
+     {{#if user.admin}}
+    <p class="text-center text-danger">Zenith Admin</p>
+    {{else}}
+
+    {{/if}}
+    </div>
+    <ul class="nav d-flex justify-content-center" id="text">
+        {{#if user}}
+        <li class="nav-item" >
+       <a class="nav-link" href="/">Home</a> 
+    </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a> 
+       </li> 
+    <li class="nav-item">
+       <a class="nav-link" href="/users/edit/{{user._id}}">Edit</a> 
+    </li>
+    <li class="nav-item" >
+       <a class="nav-link" href="/myposts">My Posts</a> 
+    </li>
+    <li class="nav-item" >
+       <a class="nav-link" href="/add">Add Post</a> 
+    </li>
+    <li class="nav-item" >
+       <a class="nav-link" href="/logout">Logout</a> 
+    </li>
+     {{#if user.admin}}
+     <li class="nav-item" >
+       <a class="nav-link" href="/admin">Admin</a> 
+    </li>
+    {{/if}}
+     
+     
+      {{else}}
+     <li class="nav-item">
+       <a class="nav-link" href="/">Home</a> 
+    </li>
+    <li class="nav-item" >
+       <a class="nav-link" href="/register">Create Account</a> 
+    </li>
+    <li class="nav-item" >
+       <a class="nav-link" href="/login">Login</a> 
+    </li>
+    
+    
+    {{/if}}
+    </ul>
+    
+</div>

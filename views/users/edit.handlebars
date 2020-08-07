@@ -1,0 +1,70 @@
+<div class="container my-4 p-3" id="editForm">
+    <form action="/users/{{user._id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT"> 
+       
+        <h5 class="text-center">Edit Account</h5>
+
+    <div class="form-group">
+      <label for="username">Your Username</label>
+      <input type="text" name="username" class="form-control" value="{{user.username}}">
+    </div>
+     <div class="form-group">
+      <label for="email">Your Email</label>
+      <input type="email" name="email" class="form-control" value="{{user.email}}">
+    </div>
+    
+
+        
+<div class="form-group" id="admin">
+
+      {{#if user.admin}}
+       <label for="admin" class="">Zenith Admin Certified</label>
+       {{else}}
+             <label for="admin" class="ml-4">Zenith Certified</label>
+        {{/if}}
+      <input type="password" name="admin" class="form-control" placeholder="Member Zenith Forum" id="pass1" value="{{user.admin}}">
+    </div>
+     
+    <br>
+   
+     
+     <button class="btn btn-primary " type="submit">Update Account</button>
+    </form>
+</div>
+
+
+
+<style>
+
+  #pass1{
+    border:none;
+  }
+
+  #admin p{
+         font-weight: bold;
+  }
+  #admin label{
+             font-weight: bold;
+
+  }
+
+     body{
+        background: ghostwhite;
+        margin:0;
+        padding:0;
+    }
+    #welcome img{
+    width:50px;
+    width:50px;
+    border-radius: 50%;
+}
+#footer p{
+    text-align: center;
+}
+#editForm input{
+    background: ghostwhite;
+}
+.btn{
+  font-weight: bold;
+}
+</style>

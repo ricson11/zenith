@@ -1,0 +1,85 @@
+<div class="container my-4 col-md-10 ">
+    <div class="row">
+
+
+
+        
+       <div class="col-md-4">
+          <p class="text-center" id="bold">Profile</p> 
+       {{#each profile}}
+       
+      <div class="card " id="cardo">
+          <div class="card-header">
+              <p class="text-center" id="pro">{{user.username}} Profile</p>
+          </div>
+         <div class="container my-2">
+          <p class="text-center" id="pro" >Username: {{user.username}}</p>
+         <p class="text-center">Email: {{user.email}}</p>
+         <p>Registered Date: {{formatDate date "D MMMM, YYYY"}}</p>
+
+            <p class="text-center">Picture</p>
+         <img src="{{user.photo}}" width="220px" class="mb-3 d-block mx-auto">
+         </div>          
+      </div>     
+       {{/each}}
+       </div>
+        
+        <div class="col-md-8">
+ <p class="text-center" id="bold">All posts</p> 
+
+       {{#each features}}
+       
+      <div class="card" id="cardo">
+          <div class="card-header">
+       <p>Posted in {{category}} by {{user.username}}</p>
+          </div>
+        <img class="card-top-img" src="{{image}}" id="imgCard">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+        </div>  
+      </div>     
+       {{/each}}
+       </div>
+       
+
+       </div>
+       </div>
+       <!--end -->
+
+
+
+<style>
+    body{
+        background: ghostwhite;
+        margin:0;
+        padding:0;
+    }
+    #welcome img{
+    width:50px;
+    width:50px;
+    border-radius: 50%;
+}
+.card{
+    background: ghostwhite;
+    margin-bottom: 10px;
+}
+#imgCard{
+    height:70vh;
+}
+.userImage{
+    width:100px;
+    height:100px;
+}
+#pro{
+    text-transform: capitalize;
+}
+#bold{
+    font-weight: bold;
+}
+#footer p{
+    text-align: center;
+}
+#welcome{
+    text-transform: capitalize;
+}
+</style>

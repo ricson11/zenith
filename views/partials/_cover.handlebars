@@ -1,0 +1,33 @@
+
+<div class="container-fluid" id="push">
+  <h5 class="text-center text-danger " id="put">okayyyyyy</h5>
+</div>
+
+
+<style>
+#push{
+    width:100%;
+    height:120vh;
+    background:grey;
+    position: absolute;
+    top:0;
+    display:none;
+  }
+  #put{
+    margin-top:10em;
+  }
+</style>
+
+
+<script>
+
+  var log = document.querySelector('#log')
+    var push = document.querySelector('#push')
+
+
+
+    log.addEventListener('click', function(){
+      push.style.display='block';
+    })
+
+</script>

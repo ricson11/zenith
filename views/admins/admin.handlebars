@@ -1,0 +1,154 @@
+
+{{>_admin}}
+
+  {{#if user.superAdmin}}
+<div class="container my-5">
+   <form class="form-search" action="/search_users" method="GET">
+     <div class="input-group mt-3" id="search">
+         <input type="search" name="query" class="form-control" placeholder="Find user by username" >
+         <div class="input-group-append">
+             <button class="btn btn-dark" type="submit" id="btnSearch">Find User</button>
+         </div>
+     </div>
+       </form>
+</div>
+  {{/if}}
+<div class="container my-4">
+   <div class="row">
+       
+      <div class="col-md-3" >
+    <h5 class="text-center">News</h5>      
+          {{#each news}}
+     <div class="card mb-3" id="cardAd">
+         <div class="card-header">
+  <p>Posted by:<span class="bg-danger" id="sec"><a href="/user/{{user._id}}/{{user.username}}"> {{user.username}}</a></p></span></p>
+
+         </div>
+         <img class="card-img-top" src="{{image}}">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+        </div> 
+        <div class="card-footer d-flex justify-content-between">
+            <a href="/edit/{{_id}}" id="edit">Edit Post</a>
+    
+    <form action="/features/{{_id}}?_method=DELETE" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-primary" type="submit" >Delete</button>
+    </form>
+        </div>
+     </div>     
+       {{/each}}
+      </div>
+      <div class="col-md-3" >
+ <h5 class="text-center">Politics</h5>      
+
+          {{#each pols}}
+     <div class="card mb-3" id="cardAd">
+         <div class="card-header">
+  <p>Posted by:<span class="bg-danger" id="sec"><a href="/user/{{user._id}}/{{user.username}}"> {{user.username}}</a></p></span></p>
+
+         </div>
+         <img class="card-img-top" src="{{image}}">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+        </div> 
+         <div class="card-footer d-flex justify-content-between">
+            <a href="/edit/{{_id}}" id="edit">Edit Post</a>
+    
+    <form action="/features/{{_id}}?_method=DELETE" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-primary" type="submit" >Delete</button>
+    </form>
+        </div>
+     </div>     
+       {{/each}}
+      </div>
+     <div class="col-md-3" >
+         <h5 class="text-center">Entertainment</h5>      
+    
+          {{#each ents}}
+     <div class="card mb-3 " id="cardAd">
+         <div class="card-header">
+  <p>Posted by:<span class="bg-danger" id="sec"><a href="/user/{{user._id}}/{{user.username}}"> {{user.username}}</a></p></span></p>
+
+         </div>
+         <img class="card-img-top" src="{{image}}">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+        </div> 
+         <div class="card-footer d-flex justify-content-between">
+            <a href="/edit/{{_id}}" id="edit">Edit Post</a>
+    
+    <form action="/features/{{_id}}?_method=DELETE" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-primary" type="submit" >Delete</button>
+    </form>
+        </div>
+     </div>     
+       {{/each}}
+      </div>
+      <div class="col-md-3" >
+          <h5 class="text-center">Education</h5>      
+    
+          {{#each edu}}
+     <div class="card mb-3 " id="cardAd">
+         <div class="card-header">
+  <p>Posted by:<span class="bg-danger" id="sec"><a href="/user/{{user._id}}/{{user.username}}"> {{user.username}}</a></p></span></p>
+
+         </div>
+         <img class="card-img-top" src="{{image}}">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+        </div> 
+         <div class="card-footer d-flex justify-content-between">
+            <a href="/edit/{{_id}}" id="edit">Edit Post</a>
+    
+    <form action="/features/{{_id}}?_method=DELETE" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-primary" type="submit" >Delete</button>
+    </form>
+        </div>
+     </div>     
+       {{/each}}
+      </div>
+   </div> 
+</div>
+
+<style>
+   body{
+       background: ghostwhite;
+   } 
+   #cardAd{
+            background: ghostwhite;
+  
+   }
+   #cardAd img{
+       height:70vh;
+   }
+   #edit{
+       text-decoration: none;
+       background: blue;
+       color:white;
+       padding:5px;
+       font-weight: bold;
+       border-radius: 10px;
+   }
+   #footer p{
+    text-align: center;
+}
+.btn{
+    font-weight: bold;
+}
+@media (max-width:600px){
+    #search{
+        width:100%;
+        margin: auto;
+        
+    }
+    #search input{
+        padding: 18px;
+        
+    }
+
+}
+</style>

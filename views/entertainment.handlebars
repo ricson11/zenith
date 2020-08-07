@@ -1,0 +1,40 @@
+
+{{>_section2}}
+
+<div class="container my-4">
+
+    <div class="row">
+        <div class="col-md-8">
+           <h5 class="text-center">Latest</h5> 
+       {{#each ent}}
+      <div class="card" id="cardo">
+          <div class="card-header">
+       <p>posted in {{category}}</p>
+          </div>
+        <img class="card-top-img" src="{{image}}" id="imgCard">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+        </div>  
+      </div>     
+       {{/each}}
+       </div>
+       <!--end -->
+
+        <div class="col-md-4">
+    <h5 class="text-center">Recent</h5> 
+
+       {{#each ents}}
+      <div class="card" id="cardo">
+          <div class="card-header">
+       <p>posted in {{category}}</p>
+          </div>
+        <img class="card-top-img" src="{{image}}" id="imgCard">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+        </div>  
+      </div>     
+       {{/each}}
+       </div>
+       </div>
+       </div>
+      

@@ -1,0 +1,162 @@
+body{
+    background: ghostwhite;
+    margin: 0;
+    padding: 0;
+}
+.preloader{
+    position: fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-size:3em;
+    color:red;
+    background: burlywood;
+    visibility: visible;
+    z-index: 999;
+}
+.hide-preloader{
+    z-index: -999;
+    visibility: hidden;
+}
+#search{
+    width:50vw;
+    margin: auto;
+    
+}
+#search input{
+    padding: 18px;
+    background: ghostwhite;
+}
+#btnSearch{
+    font-weight: bold;
+}
+#slide{
+    border-bottom: 1px solid lightgray;
+}
+.card-body{
+      background: ghostwhite;
+
+}
+.card-header{
+    background: ghostwhite;
+
+}
+.card{
+    box-shadow:0px 2px 2px grey
+}
+#footer p{
+    text-align: center;
+}
+#text a{
+    font-size:1.1em;
+    
+}
+#head2 a{
+    font-size:1.1em;
+}
+#head   {
+    font-weight:bold;
+    margin-bottom: .5em;
+}
+
+
+#one{
+    text-decoration: none;
+
+}
+#imgCard{
+    height:50vh;
+}
+#plus{
+    border-bottom: 1px solid red;
+   
+}
+.card-group img{
+    height:70vh;
+}
+.card-group a{
+    text-decoration: none;
+    color:black;
+}
+#sec{
+    color:white;
+    border-radius: 10px;
+    padding:5px;
+    font-weight: bold;
+    margin-left:10px;
+}
+#sec a{
+    color:white;
+}
+#group img{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    margin-left:10px;
+}
+#cardo{
+    margin-bottom: 10px;
+}
+#cardo a{
+       color:black;
+}
+#posts img{
+    width:250px;
+    height:250px;
+}
+#posts a{
+    text-decoration: none;
+}
+#feature{
+    background: ghostwhite;
+}
+#feature a{
+    text-decoration: none;
+    color:black;
+}
+#feature #sec a{
+    color:white;
+}
+#details{
+    white-space:nowrap;
+    width:80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+#count a{
+    color:black;
+    
+    font-size:1.1em
+}
+#welcome{
+    font-size:1.1em;
+    text-transform: capitalize;
+}
+#welcome img{
+    width:50px;
+    width:50px;
+    border-radius: 50%;
+}
+#alerts{
+    text-align: center;
+    color:white;
+    font-weight: bold;
+}
+
+@media (max-width:600px){
+    #search{
+        width:100%;
+        margin: auto;
+        
+    }
+    #search input{
+        padding: 18px;
+        
+    }
+
+}

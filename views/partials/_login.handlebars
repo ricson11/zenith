@@ -1,0 +1,57 @@
+ <!--{{#if login}}
+    <div class="alert" id="alert2">
+      <p clas="text-center mt-4" id="main"> {{login}}</p> 
+        <p class="text-center"> <i class="fa fa-spinner fa-spin" id="spin"></i></p>
+ <p class="text-center"><img src="{{user.photo}}" id="phot"></p>
+ <p class="text-center text-white" id="very">Verifying user... {{user.username}}</p>
+        </div>
+    {{/if}}
+</div>-->
+
+<style>
+    #very{
+        text-transform: capitalize;
+    }
+#alert2{
+    width:100%;
+    height:120vh;
+    text-align:center;
+    color:white;
+    
+    background: grey;
+    
+
+    
+    
+}
+#main{
+    color:white;
+    font-size: 1.2em;
+    
+}
+#phot{
+    width: 100px;
+    height:100px;
+    border-radius: 50%;
+}
+ #spin{
+    font-size: 4em;
+    color:white;
+    margin-top: 1em;
+  }
+
+</style>
+
+
+
+<script>
+    
+
+var alerts = document.querySelector('#alert2');
+
+
+
+setTimeout(function(){
+    alert2.style.display='none';
+}, 8000)
+</script>

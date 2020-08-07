@@ -1,0 +1,20 @@
+<div class="container text-center my-4" id="profile">
+<p class="proName">Name: {{user.username}}</p><br>
+<p>Email: {{user.email}}</p><br>
+<p>Picture</p>
+<img src="{{user.photo}}" class="responsive"><br><br>
+<p>Registered Date: {{formatDate user.date "D MMMM YYYY, h:mm A"}}</p>
+
+</div>
+
+
+
+<style>
+    #profile img{
+        width:200px;
+        height:200px;
+    }
+    .proName{
+        text-transform: capitalize;
+    }
+</style>

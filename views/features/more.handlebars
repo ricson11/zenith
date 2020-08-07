@@ -1,0 +1,148 @@
+<div class="container col-md-10 border my-5">
+    <h5 class="text-center p-2">{{feature.title}}</h5>
+    <img src="{{feature.image}}"  class="d-block mx-auto" id="first">
+    <p class="text-center p-3">{{feature.details}}</p>
+    <div class="container my-4">
+    <h5 class=" text-center p-2" >Leave a Comment</h5>
+     
+       <form action="/features/comment/{{feature._id}}" method="POST" >
+       <textarea name="commentBody" class="form-control" id="comments" rows="5"></textarea><br>
+           {{#if user}}
+       <button class="btn btn-primary d-block mx-auto" type="submit">Post Comment</button>
+         {{else}}
+        <p class="text-center" id="log"> <a href="/login" >Login to Comment</a></p>
+     {{/if}}
+       </form>
+    </div>
+    <div class="conatiner">
+    {{#each feature.comments}}
+    <div class="card mb-3">
+        <div class="card-header">
+    <p>Comment by, <span><a href="/" id="name" class="text-danger">{{commentUser.username}}</a> <img src="{{commentUser.photo}}"> , at {{formatDate date "h:mm a"}} </span></p>
+        </diV>
+        <div class="card-body">
+           <p>{{commentBody}}</p>
+        </div>
+        </div>
+        {{/each}}
+    </div>
+    <!--for related posts-->
+
+    <div class="container my-5">
+        {{#if related}}
+        <h5 class="text-center my-3">Related Post</h5>
+        {{/if}}
+        {{#each related}}
+        <div class="card mb-3" id="related">
+           <div class="card-header">
+    <p>Posted by, <span><a href="/" id="name" class="text-danger">{{user.username}}</a> <img src="{{user.photo}}"> , in {{category}} </span></p>
+           </div> 
+           <div class="card-body">
+              <a href="/features/{{_id}}" ><h5 class="card-title text-center">{{title}}</h5></a>
+               <img class="d-block mx-auto" src="{{image}}" >
+           </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <!-- popular posts -->
+    <div class="container my-5">
+        {{#if popular}}
+        <h5 class="text-center my-3">Popular Post</h5>
+        {{/if}}
+        {{#each popular}}
+        <div class="card mb-3" id="related">
+           <div class="card-header">
+    <p> Views {{views}}, Posted by, <span><a href="/" id="name" class="text-danger">{{user.username}}</a> <img src="{{user.photo}}"> , in {{category}} </span></p>
+           </div> 
+           <div class="card-body">
+              <a href="/features/{{_id}}" ><h5 class="card-title text-center">{{title}}</h5></a>
+               <img class="d-block mx-auto" src="{{image}}" >
+           </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+
+
+
+<style>
+    #log a {
+           text-decoration: none; 
+           font-weight: bold;
+    }
+    #related .card-body img{
+        width:250px;
+        height:250px;
+    }
+    .card{
+        background: ghostwhite;
+    }
+    #name{
+      text-decoration: none;
+    }
+ body{
+     background: ghostwhite;
+ } 
+ #text a{
+    font-size:1.1em;
+    
+}
+#head2 a{
+    font-size:1.1em;
+}
+#head   {
+    font-weight:bold;
+    margin-bottom: .5em;
+}  
+
+#one{
+    text-decoration: none;
+
+}
+#count a{
+    color:black;
+    
+    font-size:1.1em
+}
+#welcome{
+    font-size:1.1em;
+    text-transform: capitalize;
+}
+#welcome img{
+    width:50px;
+    width:50px;
+    border-radius: 50%;
+}
+#footer p{
+    text-align: center;
+}
+#comments{
+  
+    margin:auto;
+    background: ghostwhite;
+}
+.btn{
+    width:20vw;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.card-header img{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+#first{
+    width:250px;
+    height:250px;
+}
+@media(max-width:600px){
+     .btn{
+    width:50vw;
+     font-weight: bold;
+    border-radius: 10px;
+}
+}
+</style>

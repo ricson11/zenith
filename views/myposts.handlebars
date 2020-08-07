@@ -1,0 +1,68 @@
+<div class="container my-4 col-md-10 ">
+    <div class="row">
+        <div class="col">
+            {{#if posts}}
+           <h5 class="text-center" id="user">Posts by user {{user.username}}</h5> 
+       {{else}}
+  <h5 class="text-center" id="user">You don't have post yet, {{user.username}}</h5> 
+{{/if}}
+       {{#each posts}}
+      <div class="card" id="cardo">
+          <div class="card-header">
+       <p>posted in {{category}} by {{user.username}}</p>
+          </div>
+        <img class="card-top-img" src="{{image}}" id="imgCard">
+        <div class="card-body">
+     <a href="/features/{{_id}}"><h5 class="card-title">{{title}}</h5> </a>  
+            <p class="card-text" id="details">{{details}}</p>
+        </div>
+          <div class="card-footer d-flex justify-content-between">
+            <a href="/edit/{{_id}}" id="edit">Edit Post</a>
+    
+    <form action="/features/{{_id}}?_method=DELETE" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-primary" type="submit" >Delete</button>
+    </form>
+        </div>  
+      </div>     
+       {{/each}}
+       </div>
+       </div>
+       </div>
+       <!--end -->
+
+
+
+<style>
+    body{
+        background: ghostwhite;
+        margin:0;
+        padding:0;
+    }
+    #welcome img{
+    width:50px;
+    width:50px;
+    border-radius: 50%;
+}
+ .card-footer #edit{
+       text-decoration: none;
+       background: blue;
+       color:white;
+       padding:5px;
+       font-weight: bold;
+       border-radius: 10px;
+   }
+   .btn{
+       font-weight: bold;
+   }
+.card{
+    background: ghostwhite;
+    margin-bottom: 10px;
+}
+#imgCard{
+    height:70vh;
+}
+#user{
+    
+}
+</style>
