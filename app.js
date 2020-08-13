@@ -14,13 +14,19 @@ const MongoStore = require('connect-mongo')(session)
  const env = require('dotenv');
 const app = express();
  const{ensureAuthenticated}=require('./helpers/auth');
-env.config({path: './config/.env'});
+//env.config({path: './config/.env'});
 mongoose.promise =global.promise
-mongoose.connect('mongodb://localhost/project4', {
+mongoose.connect('mongodb+srv://wonder:wonder5555@cluster0.0c8qh.mongodb.net/zenith?retryWrites=true&w=majority', {
     useNewUrlParser:true, useUnifiedTopology:true,useCreateIndex:true,
 })
 .then(()=>console.log('mongodb connected successfully!'))
 .catch(err=>console.log(err));
+
+/*mongoose.connect('mongodb://localhost/project4', {
+    useNewUrlParser:true, useUnifiedTopology:true,useCreateIndex:true,
+})
+.then(()=>console.log('mongodb connected successfully!'))
+.catch(err=>console.log(err));*/
 
 const {formatDate} = require('./helpers/hps');
 
