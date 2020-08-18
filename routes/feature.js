@@ -1,38 +1,16 @@
 const express = require('express');
 const router = express.Router();
-
+const cloudinary = require('cloudinary');
+//const {CloudinaryStorage} = require('multer-storage-cloudinary');
 const multer =require('multer');
-
-
+const upload = require('../middlewares/multer');
+//const env = require('dotenv');
 require('../models/Feature');
 require('../models/User');
  const{ensureAuthenticated}=require('../helpers/auth');
+ 
+ //env.config({path:'../config/.env'});
 
-var storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, 'public/uploads')
-    },
-   /* filename:function(req, file, cb){
-        cb(null, file.fieldname + "_" + Date.now())
-    },*/
-    filename: function(req, file, cb){
-        const ext = file.mimetype.split('/')[1];
-     cb(null ,file.fieldname +'_'+ `${Date.now()}.${ext}`);
-          //cb(null,  file.fieldname +'_'+ Date.now() + '.'+ext);
-         }
-    
-});
-function fileFilter(req, file, cb){
-    if(file.mimetype ==='image/jpg' || file.mimetype==='image/jpeg'
-    || file.mimetype==='image/png'){
-        cb(null, true)
-    }else{
-        cb(new Error('image is not supported'), false)
-    }
-}
-var upload = multer({storage:storage, fileFilter:fileFilter,
-     limit:{filesize:1000000}})
-   
 
      router.get('/', async(req, res)=>{
         const news1 = await Feature.find({category: 'news'}).sort({date:-1}).limit(1).populate(' user') 
@@ -130,21 +108,28 @@ router.get('/edit/:id', ensureAuthenticated,async(req, res , next)=>{
  
 
     
-    router.post('/features',upload.single('image'),async (req, res)=>{
+    router.post('/features',upload.single('image'),async(req, res)=>{
+       cloudinary.v2.uploader.upload(req.file.path, {folder: 'zenith'}, function(err, result){
+           if(err){
+               console.log(err);
+           }
+       
+        
         const newFeature={
             title:req.body.title,
             details:req.body.details,
             category: req.body.category,
-            image: '/uploads/' + req.file.filename,
+            image: result.secure_url,
             user: req.user.id,
         }
-
-       await  new Feature (newFeature)
+       
+         new Feature (newFeature)
         .save()
         .then(features=>{
+            console.log(newFeature)
             res.redirect('/')
-           // console.log(newFeature)
-        })
+        })     // console.log(newFeature)
+    })
     })
     router.put('/features/:id', (req, res)=>{
         Feature.findOne({_id:req.params.id})
@@ -163,13 +148,14 @@ router.get('/edit/:id', ensureAuthenticated,async(req, res , next)=>{
         })
     })
 
- router.delete('/features/:id',(req, res)=>{
+ router.delete('/features/:id',upload.single('image'),(req, res)=>{
+     
      Feature.deleteOne({_id:req.params.id})
      .then(()=>{
          res.redirect('/')
      })
+ 
  })
-
 
  router.get('/entertainment',async(req, res)=>{
  ent = await Feature.find({category: 'entertainment'}).sort({date:-1}).limit(7)
@@ -238,7 +224,7 @@ router.get('/features/:id', async(req, res , next)=>{
         const related = await Feature.find({category:q})
         .sort({date:-1}).limit(3).populate(' user')
        
-        const popular = await Feature.find({}).sort({ views:-1}).limit(3)
+        const popular = await Feature.find({}).sort({ views:-1}).limit(3).populate(' user')
     res.render('features/more', {feature, related, popular})
           //console.log(req.user)
     }

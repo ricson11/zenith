@@ -8,33 +8,11 @@ dotenv.config();
 const nodemailer = require('nodemailer');
 const async = require('async');
 const crypto = require('crypto');
+const cloudinary = require('cloudinary');
+const upload = require('../middlewares/multer');
 
-const multer =require('multer');
 
-var storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, 'public/photos')
-    },
-   /* filename:function(req, file, cb){
-        cb(null, file.fieldname + "_" + Date.now())
-    },*/
-    filename: function(req, file, cb){
-        const ext = file.mimetype.split('/')[1];
-     cb(null ,file.fieldname +'_'+ `${Date.now()}.${ext}`);
-          //cb(null,  file.fieldname +'_'+ Date.now() + '.'+ext);
-         }
-    
-});
-function fileFilter(req, file, cb){
-    if(file.mimetype ==='image/jpg' || file.mimetype==='image/jpeg'
-    || file.mimetype==='image/png'){
-        cb(null, true)
-    }else{
-        cb(new Error('image is not supported'), false)
-    }
-}
-var upload = multer({storage:storage, fileFilter:fileFilter,
-     limit:{filesize:1000000}})
+
 
 
 require('../models/User');
@@ -82,6 +60,12 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
     
      
     router.post('/register',upload.single('photo'),(req, res, )=>{
+     cloudinary.v2.uploader.upload(req.file.path, {folder: 'zenith'}, function(err, result){
+         if(err){
+           console.log(err)
+         } 
+     
+      
         if(req.body.admin==='abc'){
             admin=true;
          }else{
@@ -119,7 +103,7 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
                        username:req.body.username,
                        email:req.body.email,
                        password:req.body.password,
-                       photo:'/photos/'+req.file.filename,
+                       photo:result.secure_url,
                          admin:req.body.admin,
                    });
             //superAdmin 
@@ -134,6 +118,7 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
             new User(newUser)
               .save()
               .then(user=>{
+                console.log(newUser)
         req.flash('success_msg', 'hi !' +" "+ req.body.username+" "+ 'Your are now registered and can login')
               res.redirect('/login');
           })
@@ -146,7 +131,7 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
      }
      })
      }
-        //end here
+    })  //end here
       process.NODE_TLS_REJECT_UNAUTHORIZED='0'
          User.findOne({username:req.body.username})
          .then(user=>{
@@ -215,6 +200,11 @@ router.get('/profile', ensureAuthenticated,(req, res)=>{
     res.render('users/profile')
 })
 router.put('/users/:id', upload.single('photo'),(req, res)=>{
+  cloudinary.v2.uploader.upload(req.file.path, {folder: 'zenith'}, function(err, result){
+    if(err){
+      console.log(err)
+    }
+  
     if(req.body.admin==='abc'){
         admin=true;
      }else{
@@ -225,7 +215,7 @@ router.put('/users/:id', upload.single('photo'),(req, res)=>{
         
       user.username=req.body.username,
         user.email = req.body.email,
-       user.photo = '/photos/'+req.file.filename,
+       user.photo = result.secure_url,
         user.admin=req.body.admin,
         
         user.save()
@@ -239,7 +229,7 @@ router.put('/users/:id', upload.single('photo'),(req, res)=>{
     .catch(err=>{
         console.log(err)
     })
-
+  })
 
 })
 

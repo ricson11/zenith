@@ -1,5 +1,5 @@
 <div class="container col-md-10 border my-5">
-    <h5 class="text-center p-2">{{feature.title}}</h5>
+    <h5 class="text-center p-2" id="tit">{{feature.title}}</h5>
     <img src="{{feature.image}}"  class="d-block mx-auto" id="first">
     <p class="text-center p-3">{{feature.details}}</p>
     <div class="container my-4">
@@ -30,7 +30,7 @@
 
     <div class="container my-5">
         {{#if related}}
-        <h5 class="text-center my-3">Related Post</h5>
+        <h5 class="text-center my-3">Related Posts</h5>
         {{/if}}
         {{#each related}}
         <div class="card mb-3" id="related">
@@ -48,7 +48,7 @@
     <!-- popular posts -->
     <div class="container my-5">
         {{#if popular}}
-        <h5 class="text-center my-3">Popular Post</h5>
+        <h5 class="text-center my-3">Popular Posts</h5>
         {{/if}}
         {{#each popular}}
         <div class="card mb-3" id="related">
@@ -106,6 +106,9 @@
     color:black;
     
     font-size:1.1em
+}
+#tit{
+    text-transform: capitalize;
 }
 #welcome{
     font-size:1.1em;

@@ -25,7 +25,7 @@ module.exports={
     allowUser: function(req, res, next){
           if(req.isAuthenticated()){
             const user = User.findOne({_id:req.user.id})
-            if(req.user.admin){
+            if(req.user.admin || req.user.superAdmin){
                 return next()
             }
             req.flash('error_msg', 'Restricted page for admin only!')

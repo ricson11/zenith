@@ -46,6 +46,11 @@
        <a class="nav-link" href="/admin">Admin</a> 
     </li>
     {{/if}}
+     {{#if user.superAdmin}}
+     <li class="nav-item" >
+       <a class="nav-link" href="/admin">Admin</a> 
+    </li>
+    {{/if}}
      
      
       {{else}}

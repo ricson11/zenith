@@ -140,8 +140,13 @@ app.use('/fonts',express.static(__dirname + '/node_modules/font-awesome/fonts'))
 
 
 
-
-
+/*Cloud name:	
+dvyhqcxxe
+API Key:	
+861435413366947
+ 
+API Secret: IP6LKMgaqac4kYAhP_a8nG-XhAc
+*/
 app.set( 'port', ( process.env.PORT || 200 ));
 
 // Start node server

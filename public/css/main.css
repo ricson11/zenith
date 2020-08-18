@@ -1,7 +1,9 @@
 body{
+    user-select: none;
     background: ghostwhite;
     margin: 0;
     padding: 0;
+    
 }
 .preloader{
     position: fixed;
@@ -147,7 +149,9 @@ body{
     color:white;
     font-weight: bold;
 }
-
+.card-title{
+    text-transform: capitalize;
+}
 @media (max-width:600px){
     #search{
         width:100%;
