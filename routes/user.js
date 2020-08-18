@@ -199,11 +199,8 @@ router.get('/profile', ensureAuthenticated,(req, res)=>{
     User.findOne({user:req.user.id})
     res.render('users/profile')
 })
-router.put('/users/:id', upload.single('photo'),(req, res)=>{
-  cloudinary.v2.uploader.upload(req.file.path, {folder: 'zenith'}, function(err, result){
-    if(err){
-      console.log(err)
-    }
+router.put('/users/:id', (req, res)=>{
+   
   
     if(req.body.admin==='abc'){
         admin=true;
@@ -231,7 +228,7 @@ router.put('/users/:id', upload.single('photo'),(req, res)=>{
     })
   })
 
-})
+
 
 
 
@@ -286,7 +283,7 @@ router.get('/forgot', (req, res)=>{
               subject: 'Zenith Forum Password Reset',
               text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                 'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                'http://' + req.hostname + '/reset/' + token + '\n\n' +
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {
