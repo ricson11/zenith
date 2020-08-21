@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const cloudinary = require('cloudinary');
+//const cloudinary = require('cloudinary');
+const fs = require('fs');
 //const {CloudinaryStorage} = require('multer-storage-cloudinary');
 const multer =require('multer');
 const upload = require('../middlewares/multer');
@@ -8,7 +9,7 @@ const upload = require('../middlewares/multer');
 require('../models/Feature');
 require('../models/User');
  const{ensureAuthenticated}=require('../helpers/auth');
- 
+ const cloudinary = require('../middlewares/cloudinary');
  //env.config({path:'../config/.env'});
 
 
@@ -108,28 +109,59 @@ router.get('/edit/:id', ensureAuthenticated,async(req, res , next)=>{
  
 
     
-    router.post('/features',upload.single('image'),async(req, res)=>{
-       cloudinary.v2.uploader.upload(req.file.path, {folder: 'zenith'}, function(err, result){
-           if(err){
-               console.log(err);
-           }
+ /*   router.post('/features',upload.single('image'),async(req, res)=>{
+      
        
-        
-        const newFeature={
-            title:req.body.title,
-            details:req.body.details,
-            category: req.body.category,
-            image: result.secure_url,
-            user: req.user.id,
-        }
-       
-         new Feature (newFeature)
-        .save()
-        .then(features=>{
+         if(req.file){
+            cloudinary.v2.uploader.upload(req.file.path, {folder: 'zenith', resource_type: 'auto'}, function(err, result){
+                if(err){
+                    console.log(err);
+                }
+            const newFeature={
+                title:req.body.title,
+                details:req.body.details,
+                category: req.body.category,
+                image: result.secure_url,
+                user: req.user.id,
+            }
+                 console.log(newFeature)
+               Feature.create(newFeature)
+        })
+         }else{
+            const newFeature={
+                title:req.body.title,
+                details:req.body.details,
+                category: req.body.category,
+                user: req.user.id,
+            }
             console.log(newFeature)
-            res.redirect('/')
-        })     // console.log(newFeature)
-    })
+            Feature.create(newFeature)
+         }
+             res.redirect('/')
+    
+    })*/
+    router.post('/features',upload.array('image'),async(req, res)=>{
+        const uploader = async (path) => await cloudinary.uploads(path, 'Images');
+         if(req.method == 'POST'){
+             const urls = []
+             const files = req.files
+             for (const file of files){
+                 const {path} = file
+                 const newPath = await uploader(path)
+                 urls.push(newPath)
+                 fs.unlinkSync(path)
+             }
+              console.log(urls)
+              const newFeature={
+                      image:urls,
+                      category:req.body.category,
+                      title:req.body.title,
+                      details:req.body.details,
+              } 
+                console.log(newFeature)
+                  //Feature.create(newFeature)
+                  //res.redirect('/')
+         }
     })
     router.put('/features/:id', (req, res)=>{
         Feature.findOne({_id:req.params.id})

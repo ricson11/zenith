@@ -212,7 +212,6 @@ router.put('/users/:id', (req, res)=>{
         
       user.username=req.body.username,
         user.email = req.body.email,
-       user.photo = result.secure_url,
         user.admin=req.body.admin,
         
         user.save()
@@ -293,7 +292,7 @@ router.get('/forgot', (req, res)=>{
           }
         ], function(err) {
           if (err) return next(err);
-          res.redirect('/forgot');
+          res.redirect('back');
         });
       });
 
