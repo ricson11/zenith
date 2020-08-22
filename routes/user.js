@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const async = require('async');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
-const smtpTransport = require('nodemailer-smtp-transport');
+//const smtpTransport = require('nodemailer-smtp-transport');
 const upload = require('../middlewares/multer');
 
 
@@ -267,11 +267,8 @@ router.get('/forgot', (req, res)=>{
           },
           function(token, user, done) {
             var smtpTransport = nodemailer.createTransport({
-              host: 'smtp.gmail.com',
-              port: 587,
-              secureConnection: false,
-              requiresAuth: true,
-              domains: ["gmail.com", "googlemail.com"],
+              service: 'Gmail',
+           
               tls:{
                 rejectUnauthorized:false,
             },
