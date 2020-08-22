@@ -266,10 +266,9 @@ router.get('/forgot', (req, res)=>{
           },
           function(token, user, done) {
             var smtpTransport = nodemailer.createTransport({
-              service: 'Gmail',
+              host: 'smtp.gmail.com',
               port: 465,
-              ssl: true,
-              authentication: true,
+              secure: true,
               tls:{
                 rejectUnauthorized:false,
             },
