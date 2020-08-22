@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv')
-dotenv.config();
 const nodemailer = require('nodemailer');
 const async = require('async');
 const crypto = require('crypto');
@@ -12,7 +11,7 @@ const cloudinary = require('cloudinary');
 const upload = require('../middlewares/multer');
 
 
-
+dotenv.config({path: '../config/config.env'});
 
 
 require('../models/User');
@@ -66,7 +65,7 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
          } 
      
       
-        if(req.body.admin==='abc'){
+        if(req.body.admin===process.env.Admin){
             admin=true;
          }else{
              admin=false;
@@ -107,7 +106,7 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
                          admin:req.body.admin,
                    });
             //superAdmin 
-                if(req.body.username==='zenith'){
+                if(req.body.username===process.env.superAdmin){
                     newUser.superAdmin=true;
                 }
 
@@ -272,8 +271,8 @@ router.get('/forgot', (req, res)=>{
                 rejectUnauthorized:false,
             },
               auth: {
-                user: 'elizaofficial5@gmail.com',
-                pass: 'wonder5555'
+                user: process.env.GMAIL_EMAIL,
+                pass: process.env.GMAIL_PASS
               }
             });
             var mailOptions = {
@@ -292,7 +291,7 @@ router.get('/forgot', (req, res)=>{
           }
         ], function(err) {
           if (err) return next(err);
-          res.redirect('back');
+          res.redirect('/forgot');
         });
       });
 
