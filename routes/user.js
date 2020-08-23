@@ -138,16 +138,19 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
          if(user){
             req.flash('error_msg', 'The username already registered so your details cnnot be send')
          }else{
-        var transporter = nodemailer.createTransport({
-            service:'Gmail',
-            tls:{
-                rejectUnauthorized:false,
+          let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user:process.env.GMAIL_EMAIL,
+                pass: process.env.GMAIL_PASS,
+               
             },
-             auth: {
-             user: 'elizaofficial5@gmail.com', // generated ethereal user
-             pass: 'wonder5555', // generated ethereal password
-           }
-         });
+            tls:{
+              rejectUnauthorized:false,
+            }
+        });
           
           // send mail with defined transport object
          var mailOptions={
