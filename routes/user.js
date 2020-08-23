@@ -365,16 +365,19 @@ router.post('/reset/:token', function(req, res) {
       })
       },
       function(user, done) {
-        var smtpTransport = nodemailer.createTransport({
-          service: 'Gmail',
-          tls:{
-              rejectUnauthorized:false,
-          },
+        let transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
           auth: {
-            user: 'elizaofficial5@gmail.com',
-            pass: 'wonder5555'
+              user:process.env.GMAIL_EMAIL,
+              pass: process.env.GMAIL_PASS,
+             
+          },
+          tls:{
+            rejectUnauthorized:false,
           }
-        });
+      });
         var mailOptions = {
           to: user.email,
           from: 'Zenith Forum Password Reset<noreply.elizaofficial5@gmail.com>',
