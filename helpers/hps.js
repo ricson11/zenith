@@ -8,9 +8,7 @@ module.exports={
           'selected = "selected"$&');
        
     },
-    formatDate: function(date, format){
-        return moment(date).format(format);
-    },
+   
      truncate: function(str, len){
          if(str.length>len && str.length>0){
              var new_str=str+" ";

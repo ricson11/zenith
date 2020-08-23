@@ -11,12 +11,12 @@ const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo')(session)
- const env = require('dotenv');
+ const dotenv = require('dotenv');
 const app = express();
  const{ensureAuthenticated}=require('./helpers/auth');
-//env.config({path: './config/.env'});
+dotenv.config({path: './config/config.env'});
 mongoose.promise =global.promise
-mongoose.connect('mongodb+srv://wonder:wonder5555@cluster0.0c8qh.mongodb.net/zenith?retryWrites=true&w=majority', {
+mongoose.connect(process.env.mongo_URL, {
     useNewUrlParser:true, useUnifiedTopology:true,useCreateIndex:true,
 })
 .then(()=>console.log('mongodb connected successfully!'))
@@ -28,14 +28,15 @@ mongoose.connect('mongodb+srv://wonder:wonder5555@cluster0.0c8qh.mongodb.net/zen
 .then(()=>console.log('mongodb connected successfully!'))
 .catch(err=>console.log(err));*/
 
-const {formatDate} = require('./helpers/hps');
-
+//const {formatDate} = require('./helpers/hps');
+app.locals.moment = require('moment');
 
 
 app.engine('handlebars', exphbs({
     helpers:{
-        formatDate,
-      
+        formatDate: function(date, format){
+            return app.locals.moment(date).format(format);
+        },
         selected: function (selected, options) {
             return options
               .fn(this)
