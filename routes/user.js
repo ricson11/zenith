@@ -266,17 +266,19 @@ router.get('/forgot', (req, res)=>{
             });
           },
           function(token, user, done) {
-            var smtpTransport = nodemailer.createTransport({
-              service: 'Gmail',
-           
+            let transporter = nodemailer.createTransport({
+              host: 'smtp.gmail.com',
+              port: 465,
+              secure: true,
+              auth: {
+                  user:process.env.GMAIL_EMAIL,
+                  pass: process.env.GMAIL_PASS,
+                 
+              },
               tls:{
                 rejectUnauthorized:false,
-            },
-              auth: {
-                user: process.env.GMAIL_EMAIL,
-                pass: process.env.GMAIL_PASS
               }
-            });
+          });
             var mailOptions = {
               to: user.email,
               from: 'Zenith Forum <noreply.elizaofficial5@gmail.com>',
@@ -286,7 +288,7 @@ router.get('/forgot', (req, res)=>{
                 'http://' + req.hostname + '/reset/' + token + '\n\n' +
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
-            smtpTransport.sendMail(mailOptions, function(err) {
+            transporter.sendMail(mailOptions, function(err) {
               req.flash('success_msg', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
               done(err, 'done');
             });
