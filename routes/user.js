@@ -161,7 +161,7 @@ const{ensureAuthenticated, forUser}=require('../helpers/auth');
             html: `<b style="color:black"><h3>Welcome ${req.body.username}, the below is your registration details</h3></b>
              <p><b style="color:black">Username:</b> ${req.body.username}</p>
                <p><b style="color:black">Email:</b> ${req.body.email}</p>
-               <p> <a href="http://localhost:700/login">Login</a></p>
+               <p> login 'http://${req.hostname}/login/ </p>
                   `,
               // template:'email',
         
